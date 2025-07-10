@@ -1,23 +1,59 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import FileUpload from './components/FileUpload';
+import FlashcardDeck from './components/FlashcardDeck';
+import Header from './components/Header';
 
 function App() {
+  const [flashcards, setFlashcards] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleFileUpload = async (file) => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const formData = new FormData();
+      formData.append('pdf', file);
+
+      // TODO: Replace with your actual backend endpoint
+      const response = await fetch('/api/process-pdf', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to process PDF');
+      }
+
+      const data = await response.json();
+      setFlashcards(data.flashcards || []);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error processing PDF:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <main className="main-content">
+        {flashcards.length === 0 ? (
+          <FileUpload 
+            onFileUpload={handleFileUpload}
+            isLoading={isLoading}
+            error={error}
+          />
+        ) : (
+          <FlashcardDeck 
+            flashcards={flashcards}
+            onReset={() => setFlashcards([])}
+          />
+        )}
+      </main>
     </div>
   );
 }
