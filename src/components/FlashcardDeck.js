@@ -12,7 +12,6 @@ const FlashcardDeck = ({ flashcards, onReset }) => {
     if (currentCardIndex < flashcards.length - 1) {
       setCurrentCardIndex(currentCardIndex + 1);
       setIsFlipped(false);
-      setShowAnswer(false);
     }
   };
 
@@ -20,7 +19,6 @@ const FlashcardDeck = ({ flashcards, onReset }) => {
     if (currentCardIndex > 0) {
       setCurrentCardIndex(currentCardIndex - 1);
       setIsFlipped(false);
-      setShowAnswer(false);
     }
   };
 
@@ -28,12 +26,9 @@ const FlashcardDeck = ({ flashcards, onReset }) => {
     setIsFlipped(!isFlipped);
   };
 
-  // Removed unused handleShowAnswer function
-
   const handleReset = () => {
     setCurrentCardIndex(0);
     setIsFlipped(false);
-    setShowAnswer(false);
     onReset();
   };
 
