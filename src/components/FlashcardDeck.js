@@ -4,7 +4,7 @@ import './FlashcardDeck.css';
 const FlashcardDeck = ({ flashcards, onReset }) => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [showAnswer, setShowAnswer] = useState(false);
+  // Removed unused showAnswer state
 
   const currentCard = flashcards[currentCardIndex];
 
