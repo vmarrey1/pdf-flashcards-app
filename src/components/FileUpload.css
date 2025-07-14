@@ -199,6 +199,128 @@
   margin-bottom: 0.5rem;
 }
 
+/* Fellow.app-inspired enhancements */
+.fellow-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.10), 0 1.5px 6px rgba(118, 75, 162, 0.08);
+  padding: 3.5rem 2.5rem;
+  border: none;
+  transition: box-shadow 0.2s;
+}
+.fellow-card:hover {
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.16), 0 2px 8px rgba(118, 75, 162, 0.10);
+}
+.fellow-upload-icon {
+  font-size: 3.5rem;
+  color: #667eea;
+  margin-bottom: 1.2rem;
+}
+.fellow-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #222b45;
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+}
+.fellow-description {
+  color: #5a6a85;
+  font-size: 1.15rem;
+  margin-bottom: 2.2rem;
+}
+.fellow-upload-area {
+  border: 2.5px dashed #a3bffa;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf7 100%);
+  border-radius: 16px;
+  padding: 3.5rem 2.5rem;
+  margin-bottom: 2.2rem;
+  transition: border 0.2s, background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.04);
+}
+.fellow-upload-area.drag-over {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.10);
+}
+.fellow-upload-area.has-file {
+  border-color: #48bb78;
+  background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+}
+.fellow-upload-placeholder {
+  color: #a0aec0;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+.fellow-selected-file {
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.08rem;
+  color: #2d3748;
+  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.06);
+}
+.fellow-file-name {
+  color: #222b45;
+  font-weight: 700;
+}
+.fellow-file-size {
+  color: #718096;
+  font-size: 0.98rem;
+}
+.fellow-error-message {
+  background: #ffe5e5;
+  color: #c53030;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(197, 48, 48, 0.08);
+}
+.fellow-upload-actions {
+  margin-bottom: 2.2rem;
+  gap: 1.2rem;
+}
+.fellow-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.10);
+}
+.fellow-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.18);
+}
+.fellow-btn-secondary {
+  background: #f1f5f9;
+  color: #4a5568;
+  font-weight: 600;
+}
+.fellow-btn-secondary:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+.fellow-upload-tips {
+  background: linear-gradient(135deg, #f7fafc 0%, #e9ecf7 100%);
+  border-radius: 10px;
+  padding: 1.5rem 1.2rem;
+  margin-top: 2rem;
+  color: #5a6a85;
+  font-size: 1.05rem;
+  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.04);
+}
+.fellow-upload-tips h3 {
+  color: #222b45;
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+.fellow-upload-tips ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+.fellow-upload-tips li {
+  margin-bottom: 0.4rem;
+}
 @media (max-width: 768px) {
   .file-upload-container {
     padding: 1rem;
@@ -215,5 +337,14 @@
   .btn {
     width: 100%;
     justify-content: center;
+  }
+  .fellow-card {
+    padding: 2rem 0.7rem;
+  }
+  .fellow-upload-area {
+    padding: 2rem 0.7rem;
+  }
+  .fellow-upload-tips {
+    padding: 1rem 0.5rem;
   }
 } 

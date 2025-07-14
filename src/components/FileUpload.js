@@ -50,16 +50,15 @@ const FileUpload = ({ onFileUpload, isLoading, error }) => {
   };
 
   return (
-    <div className="file-upload-container">
-      <div className="upload-card">
-        <div className="upload-icon">📄</div>
-        <h2 className="upload-title">Upload Your PDF</h2>
-        <p className="upload-description">
+    <div className="file-upload-container fellow-upload">
+      <div className="upload-card fellow-card">
+        <div className="upload-icon fellow-upload-icon">📄</div>
+        <h2 className="upload-title fellow-title">Upload Your PDF</h2>
+        <p className="upload-description fellow-description">
           Drag and drop your PDF file here, or click to browse
         </p>
-        
         <div
-          className={`upload-area ${isDragOver ? 'drag-over' : ''} ${selectedFile ? 'has-file' : ''}`}
+          className={`upload-area fellow-upload-area ${isDragOver ? 'drag-over' : ''} ${selectedFile ? 'has-file' : ''}`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
@@ -72,35 +71,32 @@ const FileUpload = ({ onFileUpload, isLoading, error }) => {
             onChange={handleFileSelect}
             className="file-input"
           />
-          
           {selectedFile ? (
-            <div className="selected-file">
+            <div className="selected-file fellow-selected-file">
               <span className="file-icon">📎</span>
-              <span className="file-name">{selectedFile.name}</span>
-              <span className="file-size">
+              <span className="file-name fellow-file-name">{selectedFile.name}</span>
+              <span className="file-size fellow-file-size">
                 ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
               </span>
             </div>
           ) : (
-            <div className="upload-placeholder">
+            <div className="upload-placeholder fellow-upload-placeholder">
               <span className="upload-icon-large">📁</span>
               <p>Choose a PDF file or drag it here</p>
             </div>
           )}
         </div>
-
         {error && (
-          <div className="error-message">
+          <div className="error-message fellow-error-message">
             <span className="error-icon">⚠️</span>
             {error}
           </div>
         )}
-
-        <div className="upload-actions">
+        <div className="upload-actions fellow-upload-actions">
           {selectedFile && (
             <>
               <button
-                className="btn btn-primary"
+                className="btn btn-primary fellow-btn-primary"
                 onClick={handleSubmit}
                 disabled={isLoading}
               >
@@ -114,7 +110,7 @@ const FileUpload = ({ onFileUpload, isLoading, error }) => {
                 )}
               </button>
               <button
-                className="btn btn-secondary"
+                className="btn btn-secondary fellow-btn-secondary"
                 onClick={handleReset}
                 disabled={isLoading}
               >
@@ -123,8 +119,7 @@ const FileUpload = ({ onFileUpload, isLoading, error }) => {
             </>
           )}
         </div>
-
-        <div className="upload-tips">
+        <div className="upload-tips fellow-upload-tips">
           <h3>Tips for best results:</h3>
           <ul>
             <li>Use PDFs with clear, readable text</li>

@@ -39,11 +39,11 @@ const AuthModal = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="auth-modal-backdrop">
-      <div className="auth-modal">
-        <button className="auth-modal-close" onClick={onClose}>&times;</button>
-        <h2>{mode === 'login' ? 'Login' : 'Register'}</h2>
-        <form onSubmit={handleSubmit}>
+    <div className="auth-modal-backdrop fellow-auth-modal-backdrop">
+      <div className="auth-modal fellow-auth-modal">
+        <button className="auth-modal-close fellow-auth-modal-close" onClick={onClose}>&times;</button>
+        <h2 className="fellow-auth-title">{mode === 'login' ? 'Login' : 'Register'}</h2>
+        <form className="fellow-auth-form" onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Username"
@@ -51,6 +51,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             onChange={e => setUsername(e.target.value)}
             required
             autoFocus
+            className="fellow-auth-input"
           />
           <input
             type="password"
@@ -58,22 +59,23 @@ const AuthModal = ({ isOpen, onClose }) => {
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
+            className="fellow-auth-input"
           />
-          {error && <div className="auth-error">{typeof error === 'string' ? error : JSON.stringify(error)}</div>}
-          <button type="submit" className="btn btn-primary" disabled={loading}>
+          {error && <div className="auth-error fellow-auth-error">{typeof error === 'string' ? error : JSON.stringify(error)}</div>}
+          <button type="submit" className="btn btn-primary fellow-btn-primary" disabled={loading}>
             {loading ? 'Please wait...' : (mode === 'login' ? 'Login' : 'Register')}
           </button>
         </form>
-        <div className="auth-switch">
+        <div className="auth-switch fellow-auth-switch">
           {mode === 'login' ? (
             <>
               New user?{' '}
-              <button type="button" onClick={() => setMode('register')}>Register</button>
+              <button type="button" className="fellow-auth-switch-btn" onClick={() => setMode('register')}>Register</button>
             </>
           ) : (
             <>
               Already have an account?{' '}
-              <button type="button" onClick={() => setMode('login')}>Login</button>
+              <button type="button" className="fellow-auth-switch-btn" onClick={() => setMode('login')}>Login</button>
             </>
           )}
         </div>
