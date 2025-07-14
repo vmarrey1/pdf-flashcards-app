@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import com.pdfflashcards.backend.entity.User;
+import com.pdfflashcards.backend.repository.UserRepository;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 /**
  * REST controller for PDF flashcard generation endpoints.
@@ -25,6 +28,9 @@ public class FlashcardController {
     @Autowired
     private FlashcardService flashcardService;
     
+    @Autowired
+    private UserRepository userRepository;
+    
     /**
      * Process PDF file and generate flashcards.
      * 
@@ -32,13 +38,21 @@ public class FlashcardController {
      * @return ResponseEntity containing generated flashcards
      */
     @PostMapping("/process-pdf")
-    public ResponseEntity<FlashcardResponse> processPdf(@RequestParam("pdf") MultipartFile file) {
+    public ResponseEntity<FlashcardResponse> processPdf(@RequestParam("pdf") MultipartFile file, @AuthenticationPrincipal User user) {
         logger.info("Received PDF processing request for file: {}", file.getOriginalFilename());
         
         try {
             FlashcardResponse response = flashcardService.processPdfAndGenerateFlashcards(file);
             
             if ("success".equals(response.getStatus())) {
+                // Save to user history
+                if (user != null) {
+                    User.FlashcardHistory history = new User.FlashcardHistory(
+                        file.getOriginalFilename(), response.getFlashcards(), System.currentTimeMillis()
+                    );
+                    user.addFlashcardHistory(history);
+                    userRepository.save(user);
+                }
                 return ResponseEntity.ok(response);
             } else {
                 return ResponseEntity.badRequest().body(response);
@@ -157,5 +171,13 @@ public class FlashcardController {
             public final String status = flashcardService.isServiceReady() ? "READY" : "NOT_READY";
             public final String stats = flashcardService.getProcessingStats();
         });
+    }
+
+    @GetMapping("/flashcards/history")
+    public ResponseEntity<?> getUserFlashcardHistory(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+        return ResponseEntity.ok(user.getFlashcardHistory());
     }
 } 

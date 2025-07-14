@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ children }) => {
   return (
     <header className="header">
       <div className="header-content">
@@ -12,6 +12,7 @@ const Header = () => {
         <p className="app-subtitle">
           Transform your PDFs into interactive flashcards
         </p>
+        {children && <div className="header-actions">{children}</div>}
       </div>
     </header>
   );
